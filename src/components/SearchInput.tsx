@@ -20,7 +20,7 @@ export default function SearchInput(props: SearchInputProps) {
     clearSearch()
   }
   return (
-    <div className="search-input search-input__container">
+    <div className="search-input search-input__container" aria-label="Search">
       <label htmlFor="searchInput">🔎</label>
       <input
         id="searchInput"

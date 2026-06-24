@@ -7,7 +7,7 @@ interface CardListProps {
 export default function CardList(props: CardListProps) {
   const { list } = props;
   return (
-    <article className="cards-section">
+    <article className="cards-section" aria-label="Cards List">
      {list &&
         list.map((item: any) => (
           <Card

@@ -36,7 +36,7 @@ export default function Sidebar() {
 
   return (
     <nav className="sidebar">
-      <h3>
+      <h3 aria-hidden>
         Pop
         <br />
         Sticker.
