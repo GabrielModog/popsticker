@@ -23,7 +23,7 @@ export default function Card(props: CardProps) {
   const { selectSticker, changeSticker, removeSticker } =
     useContext(StickersContext);
 
-  const cardRef = useRef<HTMLDivElement | null>(null)
+  const cardRef = useRef<HTMLButtonElement | null>(null)
 
   const [textContent, setTextContent] = useState(text);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -107,7 +107,7 @@ export default function Card(props: CardProps) {
 
   if (selected) {
     return (
-      <div
+      <button
         id="card-item"
         ref={cardRef}
         className={appendClasses(
@@ -146,18 +146,17 @@ export default function Card(props: CardProps) {
             </button>
           </Tooltip>
         </div>
-      </div>
+      </button>
     );
   }
 
   return (
-    <div
-      tabIndex={0}
+    <button
       ref={cardRef}
       className={appendClasses("card", `card__${color} card__appear`)}
       onClick={handleOnClick}
     >
       <p className="card__content">{textContent}</p>
-    </div>
+    </button>
   );
 }
