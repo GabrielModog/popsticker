@@ -23,7 +23,8 @@ export default function Card(props: CardProps) {
   const { selectSticker, changeSticker, removeSticker } =
     useContext(StickersContext);
 
-  const cardRef = useRef<HTMLButtonElement | null>(null)
+  const cardRef = useRef<HTMLDivElement | null>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
 
   const [textContent, setTextContent] = useState(text);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -107,15 +108,18 @@ export default function Card(props: CardProps) {
 
   if (selected) {
     return (
-      <button
+      <div
         id="card-item"
         ref={cardRef}
         className={appendClasses(
           "card card-default",
           `sticker-border__${color}`
         )}
+        role="group"
+        aria-label="Sticker card"
       >
         <textarea
+          aria-multiline
           id="card-textarea"
           ref={textareaRef}
           onBlur={handleOnBlur}
@@ -137,26 +141,28 @@ export default function Card(props: CardProps) {
           </Tooltip>
           <Tooltip text="Cancel [esc]">
             <button type="button" onClick={exitEditing}>
-              <img src={CancelIcon} alt="delete action" />
+              <img src={CancelIcon} alt="cancel action" />
             </button>
           </Tooltip>
           <Tooltip text="Save [enter]">
             <button type="button" onClick={saveSticker}>
-              <img src={AddIcon} alt="delete action" />
+              <img src={AddIcon} alt="save action" />
             </button>
           </Tooltip>
         </div>
-      </button>
+      </div>
     );
   }
 
   return (
     <button
-      ref={cardRef}
+      ref={triggerRef}
       className={appendClasses("card", `card__${color} card__appear`)}
       onClick={handleOnClick}
+      aria-label={`Edit sticker: ${textContent || "empty"}`}
+      aria-expanded={selected}
     >
-      <p className="card__content">{textContent}</p>
+      <p className="card__content" aria-hidden>{textContent}</p>
     </button>
   );
 }
